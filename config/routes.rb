@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-
-  root :to => redirect("/users/sign_up")
-  
+ 
+  devise_scope :user do
+    root to: "devise/registrations#new"
+  end
   authenticated :user do
     root to: "pages#home", as: :authenticated_root
   end

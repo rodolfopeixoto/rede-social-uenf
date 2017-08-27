@@ -1,13 +1,15 @@
-Rails.application.routes.draw do
- 
-  devise_scope :user do
-    root to: "devise/registrations#new"
-  end
-  authenticated :user do
-    root to: "pages#home", as: :authenticated_root
-  end
+Rails.application.routes.draw do 
 
-  devise_for :users, controllers: {registrations: 'registrations'}
+  devise_for :users 
+  devise_scope :user do
+    authenticated :user do
+      root 'pages#home', as: :authenticated_root
+    end
+
+    unauthenticated do
+      root 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
   resources :users, only: [:show, :index]
   resources :friendships, only: [:create, :destroy, :accept] do
       member do

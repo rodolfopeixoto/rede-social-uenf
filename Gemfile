@@ -48,13 +48,14 @@ gem 'devise'
 gem 'gravatarify', '~> 3.0.0'
 gem 'public_activity'
 gem 'auto_html'
+gem 'pg'
 
-group :development do
-    gem 'sqlite3'
+group :test, :development do
+    gem 'pry-rails'
+    gem 'active_record_query_trace'
 end
 
 group :production do
-    gem 'pg'
     gem 'rails_12factor'
     gem 'unicorn'
 end
